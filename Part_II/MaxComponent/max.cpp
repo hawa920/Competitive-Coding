@@ -49,7 +49,6 @@ int max_component()
         }
       }
     }
-    printf("ret: %d, sum: %d\n", ret, sum);
     ret = sum > ret ? sum : ret;
   }
   return ret;
