@@ -20,7 +20,7 @@ typedef priority_queue<llp, llpv, greater<llp> > llppq;
 
 ll u, v, w, nv, ne, dist[MVS];
 llpv adjlist[MVS];
-llppq maxheap;
+llppq minheap;
 bool ifvisit[MVS];
 
 
@@ -48,26 +48,26 @@ void init()
 void dijkstra()
 {
   llp nextv;
-  maxheap.push(mp(0, SPT));
-  while(not maxheap.empty())
+  minheap.push(mp(0, SPT));
+  while(not minheap.empty())
   {
-    nextv = maxheap.top();
+    nextv = minheap.top();
 
     if(ifvisit[nextv.yy] == true)
     {
-      maxheap.pop();
+      minheap.pop();
       continue;
     }
 
     ifvisit[nextv.yy] = true;
-    maxheap.pop();
+    minheap.pop();
 
     for(llpv::iterator idx_i = adjlist[nextv.yy].begin(); idx_i != adjlist[nextv.yy].end(); idx_i++)
     {
       if(dist[(*idx_i).xx] > nextv.xx + (*idx_i).yy)
       {
         dist[(*idx_i).xx] = nextv.xx + (*idx_i).yy;
-        maxheap.push(mp(dist[(*idx_i).xx], (*idx_i).xx));
+        minheap.push(mp(dist[(*idx_i).xx], (*idx_i).xx));
       }
     }
   }
