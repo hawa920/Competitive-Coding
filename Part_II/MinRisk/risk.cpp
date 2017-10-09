@@ -17,26 +17,25 @@ int minRisk()
 {
   int nv, ne, u, v, w, ret;
   scanf("%d%d", &nv, &ne);
-  int rrisk[nv];
+  int risk[nv];
   iip nextv;
   iipv adjlist[nv];
   bool ifvisit[nv];
   iippq minheap;
-  vector<int> temp;
 
   for(int i = 0; i < ne; i++)
   {
     scanf("%d%d%d", &u, &v, &w);
-    adjlist[u].pb(mp(v, -w));
+    adjlist[u].pb(mp(v, w));
   }
 
   for(int i = 0; i < nv; i++)
   {
     ifvisit[i] = false;
-    rrisk[i] = INT_MAX;
+    risk[i] = INT_MAX;
   }
 
-  rrisk[0] = 0;
+  risk[0] = 0;
 
   minheap.push(mp(0, 0));
 
@@ -50,29 +49,17 @@ int minRisk()
 
     ifvisit[nextv.yy] = true;
 
+    /* find mini max, it's pretty tricky... */
     for(const auto & i : adjlist[nextv.yy])
     {
-      if(rrisk[i.xx] > i.yy)
+      if(risk[i.xx] > max(risk[nextv.yy], i.yy))
       {
-        rrisk[i.xx] = i.yy;
-        minheap.push(mp(i.yy, i.xx));
-      }
-
-      if(i.xx == nv - 1)
-      {
-        temp.pb(i.yy);
+        risk[i.xx] = max(risk[nextv.yy], i.yy);
+        minheap.push(mp(risk[i.xx], i.xx));
       }
     }
   }
-  if(temp.size() == 0)
-    return -1;
-
-  ret = temp.at(0);
-
-  for(auto const & i : temp)
-    ret = i > ret ? i : ret;
-
-  return -ret;
+  return risk[nv -1] == INT_MAX ? -1 : risk[nv - 1];
 }
 
 
