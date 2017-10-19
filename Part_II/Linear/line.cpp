@@ -12,13 +12,12 @@ typedef long long lld;
 
 struct dt_line
 {
-  int lbnd, a, b; /* y = ax + b */
+  lld lbnd, a, b; /* y = ax + b */
 };
 
 
-int nl, nv, a, b, i, j, k, pt[10009];
-lld ret;
-vector<pair<int,int>> temp;
+lld nl, nv, a, b, i, j, k, pt[10009], ret;
+vector<pair<lld, lld> > temp;
 deque<dt_line> line;
 
 
@@ -26,7 +25,7 @@ int main()
 {
   while(true)
   {
-    scanf("%d%d", &nl, &nv);
+    scanf("%lld%lld", &nl, &nv);
 
     if(nl == 0)
       return 0;
@@ -36,7 +35,7 @@ int main()
 
     for(i = 0; i < nl; i++)
     {
-      scanf("%d%d", &a, &b);
+      scanf("%lld%lld", &a, &b);
       temp.push_back({a, b});
     }
 
@@ -44,7 +43,7 @@ int main()
 
     for(i = 0; i < nv; i++)
     {
-      scanf("%d", &pt[i]);
+      scanf("%lld", &pt[i]);
     }
 
     sort(pt, pt + nv);
@@ -60,7 +59,7 @@ int main()
       }
       else
       {
-        for(k = line.size() - 1; k >= 0 and ( (float) (line.at(k).b - temp.at(i).yy) / (temp.at(i).xx - line.at(k).a)) < line.at(k).lbnd;)
+        for(k = line.size() - 1; k >= 0 and ((line.at(k).b - temp.at(i).yy) / (temp.at(i).xx - line.at(k).a)) <= line.at(k).lbnd;)
         {
           line.pop_back();
           k--;
@@ -89,6 +88,5 @@ int main()
 
     printf("%lld\n", ret);
   }
-
   return 0;
 }
