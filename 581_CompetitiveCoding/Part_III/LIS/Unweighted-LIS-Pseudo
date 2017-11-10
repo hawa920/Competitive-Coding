@@ -1,0 +1,17 @@
+input x
+n ← length of x
+result ← 0
+a[0] ← -∞
+for each i ∈ [1..n]
+     a[i] ← +∞
+for each i ∈ [1..n]
+     l ← 0
+     u ← n
+     while u > l
+          if a[⌊(l+u)/2⌋] ≤ x[i]
+               l ← 1 + ⌊(l+u)/2⌋
+          else
+               u ← ⌊(l+u)/2⌋
+     a[l] ← x[i]
+     result ← max(result,l)
+return result
