@@ -11,7 +11,6 @@ int main(int argc, char **argv)
   //arr[0] = -INT_MAX; //可有可無
   while(t--)
   {
-    ret = 0;
     scanf("%d", &n);
     // 初始化
     for(int i = 1; i <= n; i++)
@@ -19,6 +18,7 @@ int main(int argc, char **argv)
 
     scanf("%d", &temp);
     arr[1] = temp; // 長度=1 的最小值等於第一個input
+    ret = 1;
 
     for(int i = 2; i <= n; i++)
     {
