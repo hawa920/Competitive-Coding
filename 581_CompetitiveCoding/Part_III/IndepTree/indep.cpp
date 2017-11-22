@@ -12,20 +12,24 @@ vector<int> adj[1009];
 
 void dfs(int root)
 {
-  if(adj[root].size() == 0)
+  if(adj[root].size() == 0) // 如果是葉節點, largest independent set weight 就等於他們的權重
   {
     pts[root].liss = pts[root].w;
     return;
   }
 
   int idx, inc = 0, exc = 0;
+  // 遞迴
   for(idx = 0; idx < adj[root].size(); idx++)
     dfs(adj[root].at(idx));
+  // 如果要選當前的點(current root)
   for(const auto &x : adj[root])
     for(const auto &y : adj[x])
       inc += pts[y].liss;
+  // 如果不選的話
   for(const auto &x : adj[root])
     exc += pts[x].liss;
+  // 來比較選跟不選哪個比較好, 記得如果要選還要加上當前的點的weight
   pts[root].liss = max(pts[root].w + inc, exc);
 }
 

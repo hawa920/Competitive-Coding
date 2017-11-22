@@ -14,7 +14,7 @@ int main()
     arr.clear();
     for(i = 0; i < 100009; i++)
       d[i] = oo;
-    d[0] = 0;
+    d[0] = 0; // 初始化起點
 
     scanf("%d", &n);
     for(i = 0; i < n; i++)
@@ -23,6 +23,7 @@ int main()
       arr.push_back({u, {v, w}});
     }
     sort(arr.begin(), arr.end());
+    // d[i] 紀錄著到包含 i 為止所需要的最小weight
     for(const auto &x : arr)
     {
       u = x.first;

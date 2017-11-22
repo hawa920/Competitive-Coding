@@ -33,6 +33,7 @@ int main()
         else
           r = m;
       }
+      // 上面的二分搜會找到一個大於等於該活動開始時間的最小結束時間, 所以底下要往回找
       for(j = r; j >= 0; j--)
         if(x.at(j).first <= x.at(i).second.first)
           break;
